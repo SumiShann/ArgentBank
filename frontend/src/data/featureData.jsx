@@ -1,6 +1,6 @@
-import iconChat from "../assets/icon-chat.png"
-import iconMoney from "../assets/icon-money.png"
-import iconSecurity from "../assets/icon-security.png"
+import iconChat from "../assets/icon-chat-small.png"
+import iconMoney from "../assets/icon-money-small.png"
+import iconSecurity from "../assets/icon-security-small.png"
 
 const features = [
     {

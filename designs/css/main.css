@@ -35,7 +35,7 @@ body {
   white-space: nowrap !important; /* 3 */
 }
 
-.main-nav {
+/* .main-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -68,9 +68,9 @@ body {
 .main-nav-logo-image {
   max-width: 100%;
   width: 200px;
-}
+} */
 
-.hero {
+/* .hero {
   background-image: url('../img/bank-tree.jpeg');
   background-position: 0 -50px;
   background-size: cover;
@@ -212,7 +212,7 @@ body {
 .footer-text {
   margin: 0;
   padding: 0;
-}
+} */
 
 .account {
   display: flex;
@@ -259,7 +259,7 @@ body {
   padding: 10px;
 }
 
-.header {
+.welcome {
   color: #fff;
   margin-bottom: 2rem;
 }

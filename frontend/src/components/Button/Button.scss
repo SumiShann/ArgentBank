@@ -1,0 +1,22 @@
+@import "../../Colors.scss";
+
+.sign-in-button {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    border-color: $clr-btn;
+    background-color: $clr-btn;
+    color: #fff;
+}
+
+.edit-button {
+    border-color: $clr-btn;
+    background-color: $clr-btn;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px;
+    min-width: 4rem;
+  }

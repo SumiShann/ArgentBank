@@ -1,0 +1,10 @@
+.welcome {
+    color: #fff;
+    margin-bottom: 2rem;
+    &-btns{
+        display: grid;
+        justify-content: center;
+        grid-template-columns: repeat(2, max-content);
+        column-gap: 3rem;
+    }
+}

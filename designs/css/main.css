@@ -1,4 +1,4 @@
-html {
+/* html {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -19,7 +19,7 @@ body {
 
 .bg-dark {
   background-color: #12002b;
-}
+} */
 
 .sr-only {
   border: 0 !important;
@@ -214,7 +214,7 @@ body {
   padding: 0;
 } */
 
-.account {
+/* .account {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -249,9 +249,9 @@ body {
 .account-content-wrapper {
   width: 100%;
   flex: 1;
-}
+} */
 
-.edit-button {
+/* .edit-button {
   border-color: #00bc77;
   background-color: #00bc77;
   color: #fff;
@@ -262,9 +262,9 @@ body {
 .welcome {
   color: #fff;
   margin-bottom: 2rem;
-}
+} */
 
-.transaction-button {
+/* .transaction-button {
   display: block;
   width: 100%;
   padding: 8px;
@@ -274,16 +274,16 @@ body {
   border-color: #00bc77;
   background-color: #00bc77;
   color: #fff;
-}
+} */
 
 @media (min-width: 720px) {
-  .account {
+  /* .account {
     flex-direction: row;
   }
 
   .account-content-wrapper.cta {
     flex: 0;
-  }
+  } */
 
   .transaction-button {
     width: 200px;

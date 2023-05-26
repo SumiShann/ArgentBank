@@ -1,22 +1,32 @@
 @import "../../Colors.scss";
+@import "../../Mixins.scss";
 
-.sign-in-button {
-    display: block;
-    width: 100%;
-    padding: 8px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin-top: 1rem;
+.button {
     border-color: $clr-btn;
     background-color: $clr-btn;
     color: #fff;
+    &-sign-in{
+        display: block;
+        width: 100%;
+        padding: 8px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-top: 1rem;
+    }
+    &-edit {
+        font-weight: bold;
+        padding: 10px;
+        min-width: 4rem;
+    }
+    &-transaction {
+        display: block;
+        width: 100%;
+        padding: 8px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-top: 1rem;
+        @include tablet {
+            width: 200px;
+        }
+    }
 }
-
-.edit-button {
-    border-color: $clr-btn;
-    background-color: $clr-btn;
-    color: #fff;
-    font-weight: bold;
-    padding: 10px;
-    min-width: 4rem;
-  }

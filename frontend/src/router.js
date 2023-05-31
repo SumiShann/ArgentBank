@@ -7,8 +7,8 @@ export default function Router (){
     return (
         <Routes>
             <Route exact path="/" element={<Home />} />
-            <Route path='/sign-in' element={<SignIn />} />
-            <Route path='/user' element={<User />} />
+            <Route path='/login' element={<SignIn />} />
+            <Route path='/profile' element={<User />} />
             <Route path="/*" />
         </Routes>
     )

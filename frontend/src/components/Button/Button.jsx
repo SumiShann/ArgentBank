@@ -1,14 +1,12 @@
 import './Button.scss'
-import { useNavigate } from 'react-router-dom'
 
 export default function Button({ type, onClick, children }){
-    const navigate = useNavigate()
     switch (type) {
         case "login":
             return (
                 <button
                     className="button button-sign-in"
-                    onClick={() => navigate("/user") }
+                    onClick={onClick}
                 >Sign In</button>
             )
         case "save":

@@ -6,6 +6,7 @@ import { useState, useEffect } from "react"
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector} from 'react-redux'
 import { login } from '../../features/tokenReducer'
+import { getProfile } from "../../features/profileReducer"
 import { selectToken } from "../../utils/selectors"
 import "./SignIn.scss"
 
@@ -22,6 +23,7 @@ export default function SignIn(){
     useEffect(() => {
         if (token != null){
             navigate('/profile')
+            dispatch(getProfile())
         }
         return
     }, [token])

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { selectAuth, selectProfile} from '../utils/selectors';
+import { selectToken, selectProfile} from '../utils/selectors';
 
-const initialState = {
+const profileState = {
     status: 'void',
     data: null,
     error: null
@@ -9,7 +9,7 @@ const initialState = {
 
 export function getProfile(){
     return async (dispatch, getState) => {
-        const token = selectAuth(getState()).token
+        const token = selectToken(getState())
         const status = selectProfile(getState()).status
         if (status === 'pending' || status === 'updating') {
             return
@@ -24,7 +24,8 @@ export function getProfile(){
                     'Authorization': `Bearer ${token}`
                 },
             })
-            const data = await response.json()
+            const res = await response.json()
+            const data = res.body
             dispatch(actions.resolved(data))
         } catch (error) {
             dispatch(actions.rejected(error))
@@ -34,7 +35,7 @@ export function getProfile(){
 
 export const { actions, reducer } = createSlice({
     name: 'profile',
-    initialState,
+    initialState: profileState,
     reducers: {
         fetching: {
             prepare: (token) => ({
@@ -63,7 +64,7 @@ export const { actions, reducer } = createSlice({
             }),
             reducer: (draft, action) => {
                 if (draft.status === 'pending' || draft.status === 'updating') {
-                    draft.data = action.payload
+                    draft.data = action.payload.data
                     draft.status = 'resolved'
                     return
                 }
@@ -77,7 +78,7 @@ export const { actions, reducer } = createSlice({
             reducer: (draft, action) => {
                 if (draft.status === 'pending' || draft.status === 'updating') {
                     draft.error = action.payload
-                    draft.token = null
+                    draft.token = []
                     draft.status = 'rejected'
                     return
                 }
@@ -85,7 +86,7 @@ export const { actions, reducer } = createSlice({
             }
         },
         reset: (draft) => {
-            return initialState;
+            return profileState;
         }
     }
 })

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { selectAuth } from '../utils/selectors';
 
-const initialState = {
+const tokenState = {
     status: 'void',
     token: null,
     error: null
@@ -38,7 +38,7 @@ export function login(username, password){
 
 export const { actions, reducer } = createSlice({
     name: 'token',
-    initialState,
+    initialState: tokenState,
     reducers: {
         fetching: {
             prepare: (username, password) => ({
@@ -67,7 +67,7 @@ export const { actions, reducer } = createSlice({
             }),
             reducer: (draft, action) => {
                 if (draft.status === 'pending' || draft.status === 'updating') {
-                    draft.token = action.payload
+                    draft.token = action.payload.token
                     draft.status = 'resolved'
                     return
                 }
@@ -89,7 +89,7 @@ export const { actions, reducer } = createSlice({
             }
         },
         reset: (draft) => {
-            return initialState;
+            return tokenState;
         }
     }
 })

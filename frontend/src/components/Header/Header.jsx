@@ -4,6 +4,7 @@ import { selectToken, selectInfo } from "../../utils/selectors"
 import argentBankLogo from "../../assets/argentBankLogo.png"
 import * as tokenActions from "../../features/tokenReducer"
 import * as profileActions from "../../features/profileReducer"
+import * as usernameActions from "../../features/usernameReducer"
 import "./Header.scss"
 
 export default function Header(){
@@ -13,6 +14,7 @@ export default function Header(){
     function logout(){
         dispatch(tokenActions.reset())
         dispatch(profileActions.reset())
+        dispatch(usernameActions.reset())
     }
     return (
         <header>

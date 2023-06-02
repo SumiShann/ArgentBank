@@ -1,24 +1,37 @@
 import { useState } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { selectInfo } from "../../utils/selectors"
 import Input from "../Input/Input"
 import Button from "../Button/Button"
+import { updateUsername } from "../../features/usernameReducer"
 import './Welcome.scss'
 
 export default function Welcome(){
+    const dispatch = useDispatch()
     const [edit, setEdit] = useState(false)
+    const [username, setUsername] = useState()
+    const data = useSelector(selectInfo)
+
+    function handleSubmit(e, username){
+        e.preventDefault()
+        dispatch(updateUsername(username))
+    }
 
     return edit ? (
         <div className="welcome">
             <h1>Edit user info</h1>
-            <form>
-                <Input label="username" 
-                       divClass="input-user"/>
+            <form onSubmit={(e) => handleSubmit(e, username)}>
+                <Input label="username"
+                       value={data.userName} 
+                       divClass="input-user"
+                       onChange={(e) => setUsername(e.target.value)} />
                 <Input id="first-name"
-                       value="Tony"
+                       value={data.firstName}
                        divClass="input-user">
                 First name
                 </Input>
                 <Input id="last-name"
-                       value="Jarvis"
+                       value={data.lastName}
                        divClass="input-user">
                 Last name
                 </Input>
@@ -30,7 +43,7 @@ export default function Welcome(){
         </div>
     ) : (
         <div className="welcome">
-            <h1>Welcome back<br />Tony Jarvis!</h1>
+            <h1>Welcome back<br />{data.firstName} {data.lastName}!</h1>
             <Button onClick={() => setEdit(true)}>Edit name</Button>
         </div>
     )

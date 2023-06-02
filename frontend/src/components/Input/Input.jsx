@@ -6,7 +6,7 @@ export default function Input({ label, divClass="input-wrapper", type, id, onCha
             return (
                 <div className={divClass}>
                     <label htmlFor="username">Username</label>
-                    <input type="text" id="username" autoComplete="username" onChange={onChange} required/>
+                    <input type="text" id="username" placeholder={value} autoComplete="username" onChange={onChange} required/>
                 </div>
             )
         case "password":

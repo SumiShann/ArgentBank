@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
-import { selectToken } from "../../utils/selectors"
+import { selectToken, selectInfo } from "../../utils/selectors"
 import argentBankLogo from "../../assets/argentBankLogo.png"
 import * as tokenActions from "../../features/tokenReducer"
 import * as profileActions from "../../features/profileReducer"
@@ -8,8 +8,8 @@ import "./Header.scss"
 
 export default function Header(){
     const token = useSelector(selectToken)
+    const data = useSelector(selectInfo)
     const dispatch = useDispatch()
-    console.log(token)
     function logout(){
         dispatch(tokenActions.reset())
         dispatch(profileActions.reset())
@@ -27,7 +27,7 @@ export default function Header(){
                     <>
                     <NavLink className="nav-item" to="/profile">
                         <i className="fa fa-user-circle"></i>
-                        Tony
+                        {data.userName}
                     </NavLink>
                     <NavLink className="nav-item" to="/"
                             onClick={logout}>

@@ -1,32 +1,38 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { selectToken, selectProfile} from '../utils/selectors';
+import { selectToken, selectUsername} from '../utils/selectors';
+import * as profileActions from "./profileReducer";
 
-const profileState = {
+const usernameState = {
     status: 'void',
-    data: [],
+    data: null,
     error: null
 };
 
-export function getProfile(){
+export function updateUsername(username){
     return async (dispatch, getState) => {
         const token = selectToken(getState())
-        const status = selectProfile(getState()).status
+        const status = selectUsername(getState()).status
+        const update = {
+            userName: "" + username
+        }
         if (status === 'pending' || status === 'updating') {
             return
         }
-        dispatch(actions.fetching())
+        dispatch(actions.fetching(username))
         try {
             const response = await fetch('http://localhost:3001/api/v1/user/profile', {
-                method: "post",
+                method: "put",
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
+                body: JSON.stringify(update)
             })
             const res = await response.json()
             const data = res.body
             dispatch(actions.resolved(data))
+            dispatch(profileActions.update(username))
         } catch (error) {
             dispatch(actions.rejected(error))
         }
@@ -34,10 +40,14 @@ export function getProfile(){
 }
 
 export const { actions, reducer } = createSlice({
-    name: 'profile',
-    initialState: profileState,
+    name: 'user',
+    initialState: usernameState,
     reducers: {
-        fetching:  (draft) => {
+        fetching: {
+            prepare: (username) => ({
+                payload: { username },
+            }),
+            reducer:  (draft) => {
                 if (draft.status === 'void') {
                     draft.status = 'pending'
                     return
@@ -52,7 +62,8 @@ export const { actions, reducer } = createSlice({
                     return
                 }
                 return
-            },
+            }
+        },
         resolved: {
             prepare: (data) => ({
                 payload: { data },
@@ -73,7 +84,7 @@ export const { actions, reducer } = createSlice({
             reducer: (draft, action) => {
                 if (draft.status === 'pending' || draft.status === 'updating') {
                     draft.error = action.payload
-                    draft.data = []
+                    draft.data = null
                     draft.status = 'rejected'
                     return
                 }
@@ -81,20 +92,11 @@ export const { actions, reducer } = createSlice({
             }
         },
         reset: (draft) => {
-            return profileState;
-        },
-        update: {
-            prepare: (username) => ({
-                payload: { username },
-            }),
-            reducer: (draft, action) => {
-                draft.data.userName = action.payload.username
-                return
-            }
+            return usernameState;
         }
     }
 })
 
-export const { reset, fetching, resolved, rejected, update } = actions
+export const { reset, fetching, resolved, rejected } = actions
 
 export default reducer;

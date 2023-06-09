@@ -15,6 +15,7 @@ export default function Welcome(){
     function handleSubmit(e, username){
         e.preventDefault()
         dispatch(updateUsername(username))
+        setEdit(false)
     }
 
     return edit ? (

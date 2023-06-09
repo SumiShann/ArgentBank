@@ -1,9 +1,8 @@
-import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
 import Header from "../../components/Header/Header"
 import Footer from "../../components/Footer/Footer"
 import Welcome from "../../components/Welcome/Welcome"
-import { getProfile } from "../../features/profileReducer"
+import Account from "../../components/Account/Account"
+import accounts from "../../data/accountData"
 
 export default function User(){
     return (
@@ -12,7 +11,8 @@ export default function User(){
             <main className="main bg-dark">
                 <Welcome />
                 <h2 className="sr-only">Accounts</h2>
-
+                {accounts.map(elt => 
+                    <Account key={elt.title} title={elt.title} amount={elt.amount} desc={elt.desc} />)}
             </main>
             <Footer />
         </>

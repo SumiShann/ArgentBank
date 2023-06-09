@@ -4,7 +4,7 @@ import { selectAuth } from '../utils/selectors';
 const tokenState = {
     status: 'void',
     token: null,
-    error: null
+    error: null,
 };
 
 export function login(username, password){
@@ -27,9 +27,13 @@ export function login(username, password){
                 },
                 body: JSON.stringify(user)
             })
-            const data = await response.json()
-            const token = data.body.token
-            dispatch(actions.resolved(token))
+            if (response.ok){
+                const data = await response.json()
+                const token = data.body.token
+                dispatch(actions.resolved(token))
+            } else if (response.status === 400){
+                window.alert("Invalid fields")
+            }
         } catch (error) {
             dispatch(actions.rejected(error))
         }
@@ -80,7 +84,7 @@ export const { actions, reducer } = createSlice({
             }),
             reducer: (draft, action) => {
                 if (draft.status === 'pending' || draft.status === 'updating') {
-                    draft.error = action.payload
+                    draft.error = action.payload.error
                     draft.token = null
                     draft.status = 'rejected'
                     return
